@@ -1,19 +1,6 @@
-To submit your skill, replace this file with text from 
-https://rawgit.com/MycroftAI/mycroft-skills/master/meta_editor.html
+## smart beer skill
 
-
-## YOUR SKILL NAME
-One line description of the skill
-
-## Description 
-A more verbose description, including any extra instructions or
-information that didn't fit in the one line.
-
-## Examples 
-* "Hello world"
-* "Greetings planet earth"
-* "Count up"
-* "Count down"
+tells you if its ok to have a beer
 
 ## Credits 
-Your name
+HackYourOffice
