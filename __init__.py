@@ -10,7 +10,7 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
-import datetime
+import requests
 
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
@@ -53,7 +53,10 @@ class BeerSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("Darf").require("Bier").require("Trinken"))
     def handle_bier_intent(self, message):
-        if datetime.datetime.now().time().hour >= 16:
+        r = requests.get('https://bier.synyx.de')
+        i = r.text.find('Is it beertime yet? - ')
+        s = r.text[i+22:i+24]
+        if s == 'YE':
             self.speak_dialog("zum.wohl")
         else:
             self.speak_dialog("noch.nicht")
