@@ -54,9 +54,8 @@ class BeerSkill(MycroftSkill):
     @intent_handler(IntentBuilder("").require("Darf").require("Bier").require("Trinken"))
     def handle_bier_intent(self, message):
         r = requests.get('https://bier.synyx.de')
-        i = r.text.find('Is it beertime yet? - ')
-        s = r.text[i+22:i+24]
-        if s == 'YE':
+        i = r.text.find('YES! Beertime!')
+        if i > 0:
             self.speak_dialog("zum.wohl")
         else:
             self.speak_dialog("noch.nicht")
