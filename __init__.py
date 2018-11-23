@@ -10,6 +10,7 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
+import datetime
 
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
@@ -49,6 +50,13 @@ class BeerSkill(MycroftSkill):
         else:  # assume "down"
             self.count -= 1
         self.speak_dialog("count.is.now", data={"count": self.count})
+
+    @intent_handler(IntentBuilder("").require("Darf").require("Bier").require("Trinken"))
+    def handle_bier_intent(self, message):
+        if datetime.datetime.now().time().hour >= 16:
+            self.speak_dialog("zum.wohl")
+        else:
+            self.speak_dialog("noch.nicht")
 
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
